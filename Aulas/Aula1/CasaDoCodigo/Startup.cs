@@ -52,8 +52,11 @@ namespace CasaDoCodigo
                     template: "{controller=Pedido}/{action=Carrossel}/{id?}");
             });
 
-            //Verifica se o banco de dados ja está criado, caso não esteja cria a partir das migrations
-            serviceProvider.GetService<ApplicationContext>().Database.EnsureCreated();
+            //Cria o banco de dados caso não exista(Não usa migrações, recomendado para testes
+            //serviceProvider.GetService<ApplicationContext>().Database.EnsureCreated();
+
+            //Cria o banco de dados caso não exista
+            serviceProvider.GetService<ApplicationContext>().Database.Migrate();
         }
     }
 }
