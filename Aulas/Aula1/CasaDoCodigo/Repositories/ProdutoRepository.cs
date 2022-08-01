@@ -5,20 +5,15 @@ using System.Linq;
 
 namespace CasaDoCodigo.Repositories
 {
-    public class ProdutoRepository : IProdutoRepository
+    public class ProdutoRepository : BaseRepository<Produto>, IProdutoRepository
     {
-        private readonly ApplicationContext contexto;
-        private readonly DbSet<Produto> DbSet;
-
-        public ProdutoRepository(ApplicationContext contexto)
+        public ProdutoRepository(ApplicationContext contexto) : base(contexto)
         {
-            this.contexto = contexto;
-            DbSet = contexto.Set<Produto>();
         }
 
         public IList<Produto> GetProdutos()
         {
-            return contexto.Set<Produto>().ToList();
+            return dbSet.ToList();
         }
 
         public void SaveProdutos(List<Livro> livros)
@@ -26,9 +21,9 @@ namespace CasaDoCodigo.Repositories
             foreach (var livro in livros)
             {
                  
-                if (!DbSet.Where(p => p.Codigo == livro.Codigo).Any())//Evita cadastros repetidos
+                if (!dbSet.Where(p => p.Codigo == livro.Codigo).Any())//Evita cadastros repetidos
                 {
-                    DbSet.Add(new Produto(livro.Codigo, livro.Nome, livro.Preco));
+                    dbSet.Add(new Produto(livro.Codigo, livro.Nome, livro.Preco));
 
                 }
             }
