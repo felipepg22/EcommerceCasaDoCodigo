@@ -4,13 +4,23 @@
 <h3>Catálogo</h3>
 
 <div id="my-carousel" class="carousel slide" data-ride="carousel">
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <div class="row">
 
-                @{
-                    var produtos = Model.Take(4);
+    
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            @{
+                const int tamanhoPagina = 4;
+
+                int paginas = (int)Math.Ceiling((double)Model.Count() / tamanhoPagina);
+            }
+        @for(int i = 0; i < paginas; i++)
+        {
+            <div class="item @(i == 0? "active" : "")">
+                <div class="row">
+
+                    @{
+                        var produtos = Model.Skip(i * tamanhoPagina). Take(4);
 
                 }
 
@@ -39,7 +49,9 @@
 
 
         </div>
+    }
     </div>
+    
 
     <!-- Controls -->
     <a class="left carousel-control" href="#my-carousel" role="button" data-slide="prev">
