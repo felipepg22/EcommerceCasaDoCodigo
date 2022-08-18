@@ -28,7 +28,7 @@
             data: JSON.stringify(data)
         });
 
-        $("input[name='quantidade']").val(data.Quantidade);
+        
     }
 
     GetData(elemento) {
