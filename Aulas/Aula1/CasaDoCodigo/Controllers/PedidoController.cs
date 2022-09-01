@@ -53,6 +53,8 @@ namespace CasaDoCodigo.Controllers
             return View(pedido.Cadastro);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Resumo(Cadastro cadastro)
         {            
             if (ModelState.IsValid)
