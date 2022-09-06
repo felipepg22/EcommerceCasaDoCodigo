@@ -24,7 +24,6 @@ namespace CasaDoCodigo.Controllers
 
         public IActionResult Carrossel()
         {   
-
             return View(produtoRepository.GetProdutos());
         }
 
@@ -64,6 +63,7 @@ namespace CasaDoCodigo.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public UpdateQuantidadeResponse UpdateQuantidade([FromBody]ItemPedido itemPedido)
         {
             return pedidoRepository.UpdateQuantidade(itemPedido);

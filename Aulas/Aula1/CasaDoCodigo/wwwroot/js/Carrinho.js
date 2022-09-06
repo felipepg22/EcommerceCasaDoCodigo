@@ -21,11 +21,17 @@
     }
 
     PostQuantidade(data) {
+
+        let headers = {};
+
+        headers['RequestVerificationToken'] = $('[name=__RequestVerificationToken]').val();
+
         $.ajax({
             url: '/pedido/updatequantidade',
             type: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify(data)
+            data: JSON.stringify(data),
+            headers: headers
         }).done(function (response) {
 
             let itemPedido = response.itemPedido;
